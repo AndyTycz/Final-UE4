@@ -2,7 +2,7 @@
 
 #include "SlowerPotion.h"
 #include "HeroCharacter.h"
-#include "Enemy_01.h"
+#include "Enemy_Melee.h"
 #include "Kismet/GameplayStatics.h"
 #include "Engine/World.h"
 #include "Sound/SoundCue.h"

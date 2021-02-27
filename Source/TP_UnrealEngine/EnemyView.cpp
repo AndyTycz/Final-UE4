@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "EnemyView.h"
-#include "Enemy_01.h"
+#include "Enemy_Melee.h"
 
 
 
@@ -12,7 +12,7 @@ void UEnemyView::NativeInitializeAnimation()
 		pawn = TryGetPawnOwner();
 		if (pawn)
 		{
-			enemy = Cast<AEnemy_01>(pawn);
+			enemy = Cast<AEnemy_Melee>(pawn);
 		}
 	}
 }
@@ -24,7 +24,7 @@ void UEnemyView::UpdateAnimations()
 		pawn = TryGetPawnOwner();
 		if (pawn)
 		{
-			enemy = Cast<AEnemy_01>(pawn);
+			enemy = Cast<AEnemy_Melee>(pawn);
 		}
 	}
 	if (pawn) {

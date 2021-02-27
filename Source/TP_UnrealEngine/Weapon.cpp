@@ -8,7 +8,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "Particles/ParticleSystemComponent.h"
 #include "Components/BoxComponent.h"
-#include "Enemy_01.h"
+#include "Enemy_Melee.h"
 
 AWeapon::AWeapon() {
 
@@ -70,7 +70,7 @@ void AWeapon::SwordOnOverlapBegin(UPrimitiveComponent * OverlappedComponent, AAc
 {
 	if (OtherActor)
 	{
-		AEnemy_01* enemy = Cast<AEnemy_01>(OtherActor);
+		AEnemy_Melee* enemy = Cast<AEnemy_Melee>(OtherActor);
 		if (enemy)
 		{
 			if (enemy->hitParticle)

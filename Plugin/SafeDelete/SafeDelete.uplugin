@@ -1,0 +1,27 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.1",
+	"FriendlyName": "SafeDelete",
+	"Description": "Delete all the selected folders' assets which are not referenced outside them.",
+	"Category": "Misc",
+	"CreatedBy": "MinusKube",
+	"CreatedByURL": "",
+	"DocsURL": "",
+	"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/product/daf26df8b4c94149900ea0dd0a264071",
+	"SupportURL": "",
+	"EngineVersion": "4.24.0",
+	"CanContainContent": true,
+	"Installed": true,
+	"Modules": [
+		{
+			"Name": "SafeDelete",
+			"Type": "Editor",
+			"LoadingPhase": "Default",
+			"WhitelistPlatforms": [
+				"Win32",
+				"Win64"
+			]
+		}
+	]
+}

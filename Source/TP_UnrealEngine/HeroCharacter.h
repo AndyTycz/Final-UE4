@@ -87,12 +87,12 @@ public:
 	FORCEINLINE void SetHasAimTarget(bool hasTarget) { hasAimTarget = hasTarget; }
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-		class AEnemy_01* aimTarget;
+		class AEnemy_Melee* aimTarget;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 		FVector aimTargetPosition;
 
 
-	FORCEINLINE void SetAimTarget(AEnemy_01* target) { aimTarget = target; }
+	FORCEINLINE void SetAimTarget(AEnemy_Melee *target) { aimTarget = target; }
 	FRotator GetLookAtYaw(FVector target);
 
 
@@ -106,6 +106,8 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 		float stamina;
 
+		float damageMultiplierValue;
+
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 		int knowledgePoints;
 
@@ -114,6 +116,7 @@ public:
 
 	bool isSlowed;
 
+	bool isBoosted;
 
 	UPROPERTY(EditAnywhere)
 		float att01Speed;
@@ -140,6 +143,9 @@ public:
 
 
 	FTimerHandle slowerTimer;
+
+	FTimerHandle boostTimer;
+
 
 protected:
 
@@ -197,6 +203,10 @@ public:
 
 	void LowerSpeed(float time);
 	void RestoreSpeed();
+
+	void BoostDamage(float damageMult, float time);
+	void RestoreDamage();
+
 
 	void Ded();
 	UFUNCTION(BlueprintCallable)

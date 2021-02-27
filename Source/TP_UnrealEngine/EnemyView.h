@@ -29,6 +29,6 @@ public:
 		class APawn* pawn;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Movement)
-		class AEnemy_01* enemy;
+		class AEnemy_Melee* enemy;
 
 };

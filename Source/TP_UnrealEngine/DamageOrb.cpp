@@ -2,7 +2,7 @@
 
 #include "DamageOrb.h"
 #include "HeroCharacter.h"
-#include "Enemy_01.h"
+#include "Enemy_Melee.h"
 #include "Kismet/GameplayStatics.h"
 #include "Engine/World.h"
 #include "Sound/SoundCue.h"
@@ -18,7 +18,7 @@ void ADamageOrb::OnOverlapBegin(UPrimitiveComponent * OverlappedComponent, AActo
 	
 	if (OtherActor) {
 		AHeroCharacter* hero = Cast<AHeroCharacter>(OtherActor);
-		AEnemy_01* enem = Cast<AEnemy_01>(OtherActor);
+		AEnemy_Melee* enem = Cast<AEnemy_Melee>(OtherActor);
 		if (hero || enem) 
 		{
 			UGameplayStatics::ApplyDamage(OtherActor, damage, nullptr, this, damageTypeClass);

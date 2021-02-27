@@ -13,7 +13,7 @@
 #include "Sound/SoundCue.h"
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetMathLibrary.h"
-#include "Enemy_01.h"
+#include "Enemy_Melee.h"
 #include "MainPlayerController.h"
 #include "TimerManager.h"
 
@@ -65,7 +65,7 @@ AHeroCharacter::AHeroCharacter()
 	staminaStatus = EStaminaStatus::EStatus_Normal;
 
 	aimSpeed = 15.f;
-	
+
 
 	isLeftMousePressed = false;
 	isRightMousePressed = false;
@@ -96,7 +96,7 @@ void AHeroCharacter::Tick(float DeltaTime)
 
 	float deltaStamina = staminaDrainRate * DeltaTime;
 
-	//el pequeño cancercito que queria ser una state machine
+
 	switch (staminaStatus)
 	{
 	case EStaminaStatus::EStatus_Normal:
@@ -425,6 +425,24 @@ void AHeroCharacter::RestoreSpeed()
 	GetCharacterMovement()->MaxWalkSpeed = moveSpeed;
 }
 
+void AHeroCharacter::BoostDamage(float damageMult, float time)
+{
+	if (heroWeapon)
+	{
+		damageMultiplierValue = damageMult;
+		heroWeapon->damage = heroWeapon->damage * damageMultiplierValue;
+		GetWorldTimerManager().SetTimer(boostTimer, this, &AHeroCharacter::RestoreDamage, time);
+	}
+}
+
+void AHeroCharacter::RestoreDamage()
+{
+	if (heroWeapon)
+	{
+		heroWeapon->damage =  heroWeapon->damage / damageMultiplierValue;
+	}
+}
+
 void AHeroCharacter::Ded() {
 
 	UAnimInstance* animInstance = GetMesh()->GetAnimInstance();
@@ -436,12 +454,18 @@ void AHeroCharacter::Ded() {
 
 	SetMovementStatus(EMovementType::EMType_Death);
 
+
 }
 void AHeroCharacter::DeathEnd()
 {
 	GetCharacterMovement()->JumpZVelocity = 0.f;
 	GetMesh()->bPauseAnims = true;
-	GetMesh()->bNoSkeletonUpdate = true;
+	//GetMesh()->bNoSkeletonUpdate = true;
+	GetMesh()->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+	GetMesh()->SetAllBodiesSimulatePhysics(true);
+	GetMesh()->SetSimulatePhysics(true);
+	GetMesh()->WakeAllRigidBodies();
+	GetMesh()->bBlendPhysics = true;
 	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 }
 
